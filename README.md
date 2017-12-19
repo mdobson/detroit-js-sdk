@@ -1,6 +1,6 @@
 # Detroit SDK for JS
-...
-## 0.0.1
+
+## Version 0.0.1
 
 This library is extremely alpha, does not yet even properly declare dependencies. **beware**.
 
