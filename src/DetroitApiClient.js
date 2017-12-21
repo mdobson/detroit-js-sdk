@@ -5,13 +5,26 @@ const moment = require('moment');
 const WASTE_API = "https://apis.detroitmi.gov/waste_notifier/address/"
 const WASTE_FORMAT = "/?format=json"
 
+const DEMO_API = "https://data.detroitmi.gov/resource/nfx3-ihbp.json"
+
 class DetroitApiClient{
 
   constructor(){
 
   }
 
-  // Waste defaults to trash
+  // Demolitons defaults to 200 meters (656feet).
+  // The health dept standard is 400 feet.
+  demolitions(location, range = 200){
+    let query = `?$where=within_circle(location, ${location.lat}, ${location.lon}, ${range})`
+    let url = DEMO_API + query
+    console.log(url)
+    return axios.get(url).then(response => {
+      return response.data
+    });
+  }
+
+  // Waste defaults to trash.
   waste(address, type = "trash"){
     let url = WASTE_API + address + WASTE_FORMAT;
     return axios.get(url)
