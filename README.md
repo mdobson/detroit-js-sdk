@@ -10,27 +10,27 @@ const client = new DetroitApiClient();
 
 ```
 
-## Parcel Number
+### Parcel Number
 ```
 client.parcelNumber("1465 Chicago").then(req => console.log(req));
 ```
 
-## WASTE
+### Waste
 ```
 client.waste("1465 Chicago").then(req => console.log(req));
 ```
 
-## Permits
+### Permits
 ```
 client.permits("11619 Kentucky").then(req => console.log(req));
 ```
 
-## Blight
+### Blight
 ```
 client.blightTickets("1465 Chicago").then(req => console.log(req));
 ```
 
-## Demolitions
+### Demolitions
 Demolitions returns an array of demos surrounding the given point.
 The default range is 200 meters if none is supplied.
 Location currently only supports an object with `lat/lon`
