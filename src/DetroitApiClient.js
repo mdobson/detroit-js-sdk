@@ -1,5 +1,5 @@
 const axios = require('axios');
-const getParcelFor = require('./utils/getParcelFor')
+const getDetailsFor = require('./utils/getDetailsFor')
 const moment = require('moment');
 
 const WASTE_API = "https://apis.detroitmi.gov/waste_notifier/address/"
@@ -21,6 +21,8 @@ class DetroitApiClient{
     console.log(url)
     return axios.get(url).then(response => {
       return response.data
+    }).catch(error => {
+      return error
     });
   }
 
@@ -54,7 +56,8 @@ class DetroitApiClient{
   }
 
   blightTickets(address){
-    return getParcelFor(address).then(parcelId => {
+    return getDetailsFor(address).then(details => {
+      const parcelId = details.attributes.User_fld
       return `https://data.detroitmi.gov/resource/s7hj-n86v.json?parcelno=${parcelId}`
     }).then(res => {
       return axios.get(res).then(res => (res.data));
@@ -62,7 +65,8 @@ class DetroitApiClient{
   }
 
   permits(address){
-    return getParcelFor(address).then(parcelId => {
+    return getDetailsFor(address).then(details => {
+      const parcelId = details.attributes.User_fld
       return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`
     }).then(res => {
       return axios.get(res).then(response => {
@@ -73,7 +77,8 @@ class DetroitApiClient{
 
   // This is just sugar on getParcelFor
   parcelNumber(address){
-    return getParcelFor(address)
+    const details = getDetailsFor(address)
+    details.attributes.User_fld
   }
 }
 
