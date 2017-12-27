@@ -6,10 +6,20 @@ const moment = require('moment');
 const WASTE_API = "https://apis.detroitmi.gov/waste_notifier/address/"
 const WASTE_FORMAT = "/?format=json"
 
+
+
 class DetroitApiClient{
 
-  constructor(){
+  // Permit status
 
+
+  constructor(){
+    this.status = {
+      OPEN: "OPEN",
+      CLOSED: "CLOSED",
+      EXPIRED: "EXPIRED",
+      ALL: "ALL"
+    }
   }
 
   // Demolitons defaults to 200 meters (656feet).
@@ -66,13 +76,14 @@ class DetroitApiClient{
     }).catch(err => ("Something went wrong."))
   }
 
-  permits(address, status = "OPEN"){
+  permits(address, status = this.status.OPEN){
     return getDetailsFor(address).then(details => {
       const parcelId = details.attributes.User_fld
       if(status == "ALL"){
         return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`
       }else{
-        return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status}`
+        console.log(`https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status}`)
+        return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status.toString()}`
       }
     }).then(res => {
       return axios.get(res).then(response => {
