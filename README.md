@@ -21,6 +21,9 @@ client.waste("1465 Chicago").then(req => console.log(req));
 ```
 
 ### Permits
+#### params
+- address
+- status ["CLOSED", "OPEN", "EXPIRED", "ALL"] defaults to "OPEN"
 ```
 client.permits("11619 Kentucky").then(req => console.log(req));
 ```

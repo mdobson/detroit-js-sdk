@@ -66,10 +66,14 @@ class DetroitApiClient{
     }).catch(err => ("Something went wrong."))
   }
 
-  permits(address){
+  permits(address, status = "OPEN"){
     return getDetailsFor(address).then(details => {
       const parcelId = details.attributes.User_fld
-      return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`
+      if(status == "ALL"){
+        return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`
+      }else{
+        return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status}`
+      }
     }).then(res => {
       return axios.get(res).then(response => {
         return response.data
