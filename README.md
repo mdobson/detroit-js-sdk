@@ -37,12 +37,20 @@ Location currently only supports an object with `lat/lon`
 
 TODO: Limit by date
 
+Get location by lat long
 ```
-client.demolitions({lat: 42.417445,lon: -83.042118}).then(req => console.log(req))
+client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}).then(req => console.log(req))
+```
 
-client.demolitions({lat: 42.417445,lon: -83.042118}, 500).then(req => console.log(req))
+Get location by Address
+```
+client.demolitions({'address': '1465 Chicago Blvd'}).then(req => console.log(req))
+```
 
-client.demolitions({lat: 42.417445,lon: -83.042118}, 600).then(response => {
+```
+client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}, 500).then(req => console.log(req))
+
+client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}, 600).then(response => {
   const data = response;
   console.log(`There are ${data.length} demolitions planned within the target area.`)
 });
