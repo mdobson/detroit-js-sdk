@@ -20,6 +20,14 @@ class DetroitApiClient{
       EXPIRED: "EXPIRED",
       ALL: "ALL"
     }
+
+    this.trashType = {
+      BULK: "bulk",
+      RECYCLING: "recycling",
+      TRASH: "trash",
+      YARD: "yard",
+      ALL: "all"
+    }
   }
 
   // Demolitons defaults to 200 meters (656feet).
@@ -39,30 +47,16 @@ class DetroitApiClient{
   }
 
   // Waste defaults to trash.
-  waste(address, type = "trash"){
+  waste(address, type = this.trashType.TRASH){
     let url = WASTE_API + address + WASTE_FORMAT;
     return axios.get(url)
       .then(res => {return res.data})
       .then(res => {
           let pickups = res.next_pickups;
-          switch(type){
-            case "bulk":
-              return pickups["bulk"];
-              break;
-            case "recycling":
-              return pickups["recycling"];
-              break;
-            case "trash":
-              return pickups["trash"];
-              break;
-            case "yard":
-              return pickups["yard waste"];
-              break;
-            case "all":
-              return pickups;
-              break;
-            default:
-              return pickups
+          if(type != this.trashType.ALL){
+            return pickups[type]
+          }else{
+            return pickups;
           }
         })
   }

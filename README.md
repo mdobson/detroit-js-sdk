@@ -16,8 +16,12 @@ client.parcelNumber("1465 Chicago").then(req => console.log(req));
 ```
 
 ### Waste
+### params
+- address
+- type client.trashType RECYCLING, TRASH, YARD, ALL, BULK
+Defaults to trash
 ```
-client.waste("1465 Chicago").then(req => console.log(req));
+client.waste("1465 Chicago Blvd", client.trashType.RECYCLING).then(response => console.log(response));
 ```
 
 ### Permits
