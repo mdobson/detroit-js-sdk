@@ -81,7 +81,8 @@ class DetroitApiClient{
       }
     }).then(res => {
       return axios.get(res).then(response => {
-        return response.data
+        let object = {"address": address, "permits": response.data}
+        return object
       });
     });
   }

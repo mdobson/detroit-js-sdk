@@ -23,14 +23,18 @@ Defaults to trash
 ```
 client.waste("1465 Chicago Blvd", client.trashType.RECYCLING).then(response => console.log(response));
 ```
-
+---
 ### Permits
 #### params
 - address
 - status ["CLOSED", "OPEN", "EXPIRED", "ALL"] defaults to "OPEN"
+
 ```
-client.permits("11619 Kentucky", "OPEN").then(req => console.log(req));
+client.permits("555 Fake street", "OPEN").then(req => console.log(req));
 ```
+#### response
+`Returns object {"address": "555 Fake street", "permits": []}`
+---
 
 ### Blight
 ```
