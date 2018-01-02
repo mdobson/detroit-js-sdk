@@ -7,13 +7,15 @@ This library is extremely alpha, does not yet even properly declare dependencies
 ```
 const DetroitApiClient = require('./src/DetroitApiClient');
 const client = new DetroitApiClient();
-
 ```
+
+---
 
 ### Parcel Number
 ```
 client.parcelNumber("1465 Chicago").then(req => console.log(req));
 ```
+---
 
 ### Waste
 ### params
@@ -24,6 +26,7 @@ Defaults to trash
 client.waste("1465 Chicago Blvd", client.trashType.RECYCLING).then(response => console.log(response));
 ```
 ---
+
 ### Permits
 #### params
 - address
@@ -33,13 +36,16 @@ client.waste("1465 Chicago Blvd", client.trashType.RECYCLING).then(response => c
 client.permits("555 Fake street", "OPEN").then(req => console.log(req));
 ```
 #### response
+
 `Returns object {"address": "555 Fake street", "permits": []}`
+
 ---
 
 ### Blight
 ```
 client.blightTickets("1465 Chicago").then(req => console.log(req));
 ```
+---
 
 ### Demolitions
 Demolitions returns an array of demos surrounding the given point.
