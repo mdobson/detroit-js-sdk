@@ -18,7 +18,7 @@ client.parcelNumber("1465 Chicago").then(req => console.log(req));
 ---
 
 ### Waste
-### params
+#### params
 - address
 - type client.trashType RECYCLING, TRASH, YARD, ALL, BULK
 Defaults to trash
