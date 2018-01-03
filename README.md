@@ -72,3 +72,19 @@ client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}, 600).then
   console.log(`There are ${data.length} demolitions planned within the target area.`)
 });
 ```
+
+Example Response
+```
+[{ address: '1610 Burlingame',
+    commercial_building: 'No',
+    contractor_name: 'Den-Man Contractors',
+    council_district: '5',
+    demolish_by_date: '2018-03-06T00:00:00.000',
+    latitude: '42.386772',
+    location: { type: 'Point', coordinates: [Array] },
+    location_address: 'location',
+    longitude: '-83.103285',
+    neighborhood: 'Dexter-Linwood',
+    parcel_id: '06003088.',
+    price: '23240' }]
+```
