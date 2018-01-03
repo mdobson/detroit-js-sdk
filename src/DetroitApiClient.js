@@ -50,15 +50,15 @@ class DetroitApiClient{
   waste(address, type = this.trashType.TRASH){
     let url = WASTE_API + address + WASTE_FORMAT;
     return axios.get(url)
-      .then(res => {return res.data})
-      .then(res => {
-          let pickups = res.next_pickups;
-          if(type != this.trashType.ALL){
-            return pickups[type]
-          }else{
-            return pickups;
-          }
-        })
+      .then(response => {return response.data})
+      .then(response => {
+        let pickups = response.next_pickups;
+        if(type != this.trashType.ALL){
+          return pickups[type]
+        }else{
+          return pickups;
+        }
+      });
   }
 
   blightTickets(address){
