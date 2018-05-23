@@ -2,7 +2,9 @@
   "presets": ["env"],
   "env": {
     "test": {
-      "presets": ["env"]
+      "targets": {
+        "chrome": "60"
+      }
     }
   }
 }
