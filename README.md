@@ -1,5 +1,7 @@
 # Detroit SDK for JS
 
+[![Build Status](https://travis-ci.org/CityOfDetroit/detroit-js-sdk.svg?branch=master)](https://travis-ci.org/CityOfDetroit/detroit-js-sdk)
+
 ## Version 0.0.1
 
 This library is extremely alpha, does not yet even properly declare dependencies. **beware**.
@@ -12,29 +14,38 @@ const client = new DetroitApiClient();
 ---
 
 ### Parcel Number
+
 ```
 client.parcelNumber("1465 Chicago").then(req => console.log(req));
 ```
+
 ---
 
 ### Waste
+
 #### params
-- address
-- type client.trashType RECYCLING, TRASH, YARD, ALL, BULK
-Defaults to trash
+
+* address
+* type client.trashType RECYCLING, TRASH, YARD, ALL, BULK
+  Defaults to trash
+
 ```
 client.waste("1465 Chicago Blvd", client.trashType.RECYCLING).then(response => console.log(response));
 ```
+
 ---
 
 ### Permits
+
 #### params
-- address
-- status ["CLOSED", "OPEN", "EXPIRED", "ALL"] defaults to "OPEN"
+
+* address
+* status ["CLOSED", "OPEN", "EXPIRED", "ALL"] defaults to "OPEN"
 
 ```
 client.permits("555 Fake street", "OPEN").then(req => console.log(req));
 ```
+
 #### response
 
 `Returns object {"address": "555 Fake street", "permits": []}`
@@ -42,12 +53,15 @@ client.permits("555 Fake street", "OPEN").then(req => console.log(req));
 ---
 
 ### Blight
+
 ```
 client.blightTickets("1465 Chicago").then(req => console.log(req));
 ```
+
 ---
 
 ### Demolitions
+
 Demolitions returns an array of demos surrounding the given point.
 The default range is 200 meters if none is supplied.
 Location currently only supports an object with `lat/lon`
@@ -55,11 +69,13 @@ Location currently only supports an object with `lat/lon`
 TODO: Limit by date
 
 Get location by lat long
+
 ```
 client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}).then(req => console.log(req))
 ```
 
 Get location by Address
+
 ```
 client.demolitions({'address': '1465 Chicago Blvd'}).then(req => console.log(req))
 ```
@@ -74,6 +90,7 @@ client.demolitions({'location':{'lat': 42.381274,'long': -83.096931}}, 600).then
 ```
 
 Example Response
+
 ```
 [{ address: '1610 Burlingame',
     commercial_building: 'No',
