@@ -64,46 +64,37 @@ class DetroitApiClient {
       });
   }
 
-  blightTickets(address) {
-    return getDetailsFor(address)
-      .then(details => {
-        const parcelId = details.attributes.User_fld;
-        return `https://data.detroitmi.gov/resource/s7hj-n86v.json?parcelno=${parcelId}`;
-      })
-      .then(res => {
-        return axios.get(res).then(res => res.data);
-      })
-      .catch(err => "Something went wrong.");
+  async blightTickets(address) {
+    const details = await getDetailsFor(address);
+    const parcelId = details.attributes.User_fld;
+    const url = `https://data.detroitmi.gov/resource/s7hj-n86v.json?parcelno=${parcelId}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
   }
 
-  permits(address, status = this.status.OPEN) {
-    return getDetailsFor(address)
-      .then(details => {
-        const parcelId = details.attributes.User_fld;
-        if (status == "ALL") {
-          return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`;
-        } else {
-          console.log(
-            `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status}`
-          );
-          return `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status.toString()}`;
-        }
-      })
-      .then(res => {
-        return fetch(res)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            return { address: address, permits: data };
-          });
-      });
+  async permits(address, status = this.status.OPEN) {
+    const details = await getDetailsFor(address);
+    const parcelId = details.attributes.User_fld;
+    let url = "";
+    if (status == "ALL") {
+      url = `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}`;
+    } else {
+      url = `https://data.detroitmi.gov/resource/but4-ky7y.json?parcel_no=${parcelId}&permit_status=${status.toString()}`;
+    }
+    const response = await fetch(url);
+    const permits = await response.json();
+    return { address, permits };
   }
 
   // This is just sugar on getParcelFor
-  parcelNumber(address) {
-    const details = getDetailsFor(address);
-    details.attributes.User_fld;
+  async parcelNumber(address) {
+    try {
+      const details = await getDetailsFor(address);
+      return details.attributes.User_fld;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

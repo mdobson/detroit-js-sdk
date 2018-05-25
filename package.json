@@ -10,15 +10,19 @@
   "author": "Michael Evans",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.17.1",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.19.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.48",
+    "@babel/preset-env": "^7.0.0-beta.48",
     "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
+    "babel-loader": "^8.0.0-beta.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "jest": "^22.4.4",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.4"
