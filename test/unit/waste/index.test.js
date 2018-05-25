@@ -1,4 +1,4 @@
-import DetroitApiClient from "../../../src/DetroitApiClient";
+import DetroitApiClient from "../../../src/index.js";
 
 const client = new DetroitApiClient();
 

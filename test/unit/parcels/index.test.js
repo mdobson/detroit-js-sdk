@@ -1,10 +1,11 @@
-import DetroitApiClient from "../../../src/DetroitApiClient";
+import DetroitApiClient from "../../../src/index.js";
 
 const client = new DetroitApiClient();
 
 describe("Parcels", () => {
   it("Should describe parcels", async () => {
-    const parcelNumber = await client.parcelNumber("1465 Chicago");
-    console.log(parcelNumber);
+    client.parcelNumber("1465 Chicago").then(response => {
+      expect(response).toBe("06002546.");
+    });
   });
 });
