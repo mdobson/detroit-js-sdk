@@ -45,23 +45,24 @@ class DetroitApiClient {
   }
 
   // Waste defaults to trash.
-  waste(address, type = this.trashType.TRASH) {
+  async waste(address, type = this.trashType.TRASH) {
     const url = WASTE_API + address + WASTE_FORMAT;
-    return fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        const pickups = data.next_pickups;
-        if (type != this.trashType.ALL) {
-          return pickups[type];
-        } else {
-          return pickups;
-        }
-      })
-      .catch(err => {
-        return "No address found";
-      });
+    console.log(url)
+    try{
+      const response = await fetch(url);
+      if (!response.ok){
+        throw new Error('Request Failed!');
+      }
+      const data = await response.json();
+      if (type == "all"){
+        return data.next_pickups
+      } else {
+        return data.next_pickups[type];
+      }
+    } catch(err){
+      console.log(err)
+      return "No address found";
+    }
   }
 
   async blightTickets(address) {
