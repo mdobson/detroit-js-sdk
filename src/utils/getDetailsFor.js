@@ -10,7 +10,6 @@ async function getDetailsFor(address) {
         return b.score - a.score;
       })
       .filter(candidate => candidate.attributes.Loc_name != "StreetCenterli");
-    console.log(ordered);
     return ordered[0];
   } catch (err) {
     console.log(err);
